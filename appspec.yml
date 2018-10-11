@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /root/testrepository/code
+  - source: /root/testrepository/
     destination: /var/www/html/
 hooks:
   BeforeInstall:
