@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /build.xml/
+  - source: /
     destination: /var/www/html/testrepository/
 hooks:
   BeforeInstall:
