@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /build.xml/
-    destination: /var/www/html/deploy/
+    destination: /var/www/html/testrepository/
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies
