@@ -2,11 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-<<<<<<< HEAD
     destination:/var/www/html/codedeploy
-=======
-    destination: /var/www/html/
->>>>>>> parent of 8e43d33... appspec.yml
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies
