@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /var/www/html/testrepository/
-    destination: /
+    destination: /var/persistent/codedeployment
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies
