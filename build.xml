@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="nation" default="full-suite" basedir=".">
+
+    <!-- GLOBAL VARIABLES -->
+    <property name="source" value="${basedir}"/>
+    <!-- END -->
+
+    <!-- AVAILABLE COMMANDS -->
+    <target name="full-suite" depends="date, list,lint,checkModified" />
+    <!-- END -->
+
+    <!-- DATE -->
+    <target name="date">
+        <echo message="Printing system date ..."/>
+        <exec executable="date" />
+    </target>
+    <!-- END -->
+
+    <!-- LIST -->
+    <target name="list">
+        <echo message="Listing source folder ..."/>
+        <exec executable="ls">
+            <arg line="-l ${source}" />
+        </exec>
+    </target>
+<target name="checkModified" description="Check for modified php files">
+
+    <echo message="Searching for newly modified files" />
+
+    <path id="editedfiles">
+        <fileset dir="${basedir}/">
+            <modified />  <!-- Search only for modified files -->
+            <include name="**/*.php" /> <!-- Search only for files with .php extension -->
+            <exclude name="**/vendor/**" /> <!-- Exclude vendor directory -->
+        </fileset>
+    </path>
+
+    <pathconvert pathsep="${line.separator}" property="files.modified" refid="editedfiles" />
+    <condition property="modifiedFiles">
+        <not>
+            <equals arg1="${files.modified}" arg2="" />
+        </not>
+    </condition>
+
+</target>
+
+
+
+    <!-- <target name="lint" description="Perform syntax check of sourcecode files">
+    <exec executable="bash" failonerror="true">
+        <arg value="-c" />
+        <arg value="find -L ${basedir}/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l" />
+    </exec>
+</target>
+-->
+<target name="lint" depends="checkModified" description="Perform syntax check of sourcecode files" if="modifiedFiles">
+    <echo message="Linting php files" />
+    <exec executable="bash" failonerror="true">
+        <arg value="-c" />
+        <arg value="echo '${files.modified}' | xargs -n 1 -P 4 php -l" />
+    </exec>
+</target>
+
+</project>
